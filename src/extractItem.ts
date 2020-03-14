@@ -47,7 +47,7 @@ export function extractItem($: CheerioStatic, dom: Cheerio, item: any): any {
 function resolveGetter(dom: Cheerio, getter?: string) {
   if (!getter) return dom.text()
   //@ts-ignore
-  return dom[getter]()
+  return dom.attr(getter)
 }
 
 

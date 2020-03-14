@@ -53,6 +53,7 @@ var grammar = {
           return ["null", "true", "false"].includes(token) ? reject : token
         } },
     {"name": "CSS_COMBINATOR", "symbols": ["SELECTOR_BODY"], "postprocess": join},
+    {"name": "CSS_COMBINATOR", "symbols": [/[><+~]/, "_", "SELECTOR_BODY"], "postprocess": join},
     {"name": "CSS_COMBINATOR", "symbols": ["CSS_COMBINATOR", "_", /[><+~]/, "_", "SELECTOR_BODY"], "postprocess": join},
     {"name": "CSS_COMBINATOR", "symbols": ["CSS_COMBINATOR", "__", "SELECTOR_BODY"], "postprocess": join},
     {"name": "SELECTOR_BODY$ebnf$1", "symbols": ["PSEUDO_ELEMENT_SELECTOR"], "postprocess": id},

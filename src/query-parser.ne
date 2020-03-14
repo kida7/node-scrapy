@@ -63,6 +63,7 @@ SYMBOL -> [a-zA-Z]:+ {% (d, loc, reject) => {
 
 CSS_COMBINATOR ->
     SELECTOR_BODY {% join %}
+	| [><+~] _ SELECTOR_BODY {% join %}
   | CSS_COMBINATOR _ [><+~] _ SELECTOR_BODY {% join %}
   | CSS_COMBINATOR __ SELECTOR_BODY {% join %}
 

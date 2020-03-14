@@ -53,13 +53,6 @@
   },
   "sideEffects": false,
   "scripts": {
-    "prebuild": "npm run grammar",
-    "build": "",
-    "pregrammar": "mkdir -p dist/",
-    "grammar": "npx nearleyc src/query-parser.ne -o dist/grammar.js",
-    "format": "prettier-eslint --write './**/*.{js,json,md}'",
-    "pretest": "npm run grammar",
-    "test": "echint && eslint . && tap 'test/**/*.test.js'",
-    "prepublish": "npm run build"
+    "build": "npx nearleyc src/query-parser.ne -o src/grammar.js && tsc"
   }
 }

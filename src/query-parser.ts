@@ -1,6 +1,6 @@
 import nearley from 'nearley'
 
-const grammar = require('../dist/grammar')
+const grammar = require('./grammar')
 
 const compiledGrammar = nearley.Grammar.fromCompiled(grammar)
 

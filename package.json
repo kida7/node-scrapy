@@ -27,8 +27,7 @@
   "engines": {
     "node": ">=8.9.0"
   },
-  "main": "server/index.js",
-  "browser": "dist/browser.umd.min.js",
+  "main": "dist/index.js",
   "files": [
     "browser/",
     "dist/",
@@ -36,27 +35,14 @@
     "server/"
   ],
   "dependencies": {
-    "css-select": "^2.0.2",
-    "css-select-browser-adapter": "^0.1.2",
-    "dom-serializer": "^0.1.1",
-    "htmlparser2": "^3.10.1",
+    "cheerio": "https://github.com/kida7/cheerio.git",
+    "lodash": "^4.17.15",
     "nearley": "^2.16.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.0",
-    "@babel/preset-env": "^7.4.2",
-    "echint": "^4.0.2",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "prettier-eslint-cli": "^4.7.1",
-    "rollup": "^1.7.4",
-    "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-commonjs": "^9.2.2",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-resolve": "^4.0.1",
-    "tap": "^12.6.1",
-    "terser": "^3.17.0"
+    "@types/cheerio": "^0.22.16",
+    "@types/lodash": "^4.14.149",
+    "@types/nearley": "^2.11.1"
   },
   "echint": {
     "ignore": [
@@ -68,9 +54,9 @@
   "sideEffects": false,
   "scripts": {
     "prebuild": "npm run grammar",
-    "build": "rollup -c -f umd browser/index.js | tee dist/browser.umd.js | terser > dist/browser.umd.min.js",
+    "build": "",
     "pregrammar": "mkdir -p dist/",
-    "grammar": "npx nearleyc lib/query-parser.ne -o dist/grammar.js",
+    "grammar": "npx nearleyc src/query-parser.ne -o dist/grammar.js",
     "format": "prettier-eslint --write './**/*.{js,json,md}'",
     "pretest": "npm run grammar",
     "test": "echint && eslint . && tap 'test/**/*.test.js'",

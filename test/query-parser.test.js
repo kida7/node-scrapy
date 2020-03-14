@@ -1,5 +1,5 @@
 const { test } = require('tap')
-const { parseQuery } = require('../lib/query-parser')
+const { parseQuery } = require('../src/query-parser')
 
 test('should extract CSS selector from query and keep it intact', (t) => {
   const query = '.home li > a'

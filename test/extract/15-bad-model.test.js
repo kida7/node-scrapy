@@ -1,7 +1,7 @@
 const { test } = require('tap')
 
-const scrapy = require('../../server/')
-const { ModelError } = require('../../lib/errors')
+const scrapy = require('../../src')
+const { ModelError } = require('../../src/errors')
 
 const source = '<html></html>'
 

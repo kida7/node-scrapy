@@ -1,7 +1,7 @@
 const { test } = require('tap')
 
-const scrapy = require('../../server/')
-const { UnknownFilterError } = require('../../lib/errors')
+const scrapy = require('../../src')
+const { UnknownFilterError } = require('../../src/errors')
 
 const { getFixtureSet } = require('../test-utils')
 

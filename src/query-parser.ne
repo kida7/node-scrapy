@@ -13,7 +13,7 @@ EXTENDED_QUERY -> CSS_COMBINATOR __ QUERY_EXTENSION _ {% d => ({
   getter: d[2].getter,
   filters: d[2].filters
 }) %}
-  | QUERY_EXTENSION
+  | QUERY_EXTENSION {% id %}
 
 SIMPLE_QUERY -> CSS_COMBINATOR {% d => ({
   selector: d[0],

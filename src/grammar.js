@@ -16,7 +16,7 @@ var grammar = {
           getter: d[2].getter,
           filters: d[2].filters
         }) },
-    {"name": "EXTENDED_QUERY", "symbols": ["QUERY_EXTENSION"]},
+    {"name": "EXTENDED_QUERY", "symbols": ["QUERY_EXTENSION"], "postprocess": id},
     {"name": "SIMPLE_QUERY", "symbols": ["CSS_COMBINATOR"], "postprocess":  d => ({
           selector: d[0],
           getter: null,

@@ -31,8 +31,8 @@ export function extractItem($: CheerioStatic, dom: Cheerio, item: any): any {
 
   if (_.isString(item)) {
     const query = parseQuery(item)
-    // console.log(query)
-    const match = dom.find(query.selector)
+
+    let match = query.selector ? dom.find(query.selector) : dom
 
     if (!match) return null
 

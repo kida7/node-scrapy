@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import cheerio from 'cheerio'
 import { parseQuery, QueryObject, Filter } from './query-parser'
 
 
@@ -16,7 +15,7 @@ export function extractItem($: CheerioStatic, dom: Cheerio, item: any): any {
       })
     }
     return matches.toArray().map((context) => {
-      let data = resolveGetter($(context), queryAST.getter)
+      let data = resolveGetter($(context), queryAST)
       return applyFilters(data, queryAST.filters);
     })
   }
@@ -35,7 +34,7 @@ export function extractItem($: CheerioStatic, dom: Cheerio, item: any): any {
     let match = query.selector ? dom.find(query.selector) : dom
     if (!match) return null
 
-    const data = resolveGetter(match, query.getter)
+    const data = resolveGetter(match, query)
 
     return applyFilters(data, query.filters)
   }
@@ -44,10 +43,12 @@ export function extractItem($: CheerioStatic, dom: Cheerio, item: any): any {
   throw `The model has to be a string, an Object or an Array; got ${unsupportedType} instead.`
 }
 
-function resolveGetter(dom: Cheerio, getter?: string) {
-  if (!getter) return dom.text()
-  //@ts-ignore
-  return dom.attr(getter)
+function resolveGetter(dom: Cheerio, query: QueryObject) {
+  if (query.getter)
+    return dom.attr(query.getter)
+  if (!query.filters.length)
+    return dom.text()
+  return dom
 }
 
 
@@ -55,7 +56,7 @@ function applyFilters(data: any, filters: Filter[]) {
   filters && filters.forEach(filter => {
     //@ts-ignore
     let func: Function = data[filter.name]
-    data = func.call(data, ...filter.args)
+    data = func ? func.call(data, ...filter.args) : ''
   })
   return data;
 }

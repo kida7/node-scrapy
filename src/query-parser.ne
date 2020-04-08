@@ -121,7 +121,7 @@ ATTRIBUTE_VALUE ->
     UNQUOTED_ATTRIBUTE_VALUE {% join %}
   | STRING {% join %}
 
-UNQUOTED_ATTRIBUTE_VALUE -> [^\[\]"',= ]:+ {% join %}
+UNQUOTED_ATTRIBUTE_VALUE -> [^\[\],=]:+ {% join %}
 
 PSEUDO_ELEMENT_SELECTOR -> "::" PSEUDO_SELECTOR_NAME {% join %}
 

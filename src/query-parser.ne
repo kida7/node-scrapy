@@ -121,7 +121,7 @@ ATTRIBUTE_VALUE ->
     UNQUOTED_ATTRIBUTE_VALUE {% join %}
   | STRING {% join %}
 
-UNQUOTED_ATTRIBUTE_VALUE -> [^\[\],=]:+ {% join %}
+UNQUOTED_ATTRIBUTE_VALUE -> [^\[\]"',= ]:+ {% join %}
 
 PSEUDO_ELEMENT_SELECTOR -> "::" PSEUDO_SELECTOR_NAME {% join %}
 
@@ -148,9 +148,9 @@ STRING ->
     SINGLE_QUOTE_STRING {% id %}
   | DOUBLE_QUOTE_STRING {% id %}
 
-SINGLE_QUOTE_STRING -> "'"  SINGLE_QUOTE_CHAR:* "'"  {% d => join(d[1]) %}
+SINGLE_QUOTE_STRING -> "'"  SINGLE_QUOTE_CHAR:* "'"  {% join %}
 
-DOUBLE_QUOTE_STRING -> "\""  DOUBLE_QUOTE_CHAR:* "\""  {% d => join(d[1]) %}
+DOUBLE_QUOTE_STRING -> "\""  DOUBLE_QUOTE_CHAR:* "\""  {% join %}
 
 SINGLE_QUOTE_CHAR ->
     ESCAPED_CHAR {% id %}

@@ -37,7 +37,7 @@ var grammar = {
         }) },
     {"name": "FILTER_ARG", "symbols": [{"literal":":"}, "VALUE"], "postprocess": d => d[1]},
     {"name": "IDENTIFIER$ebnf$1", "symbols": []},
-    {"name": "IDENTIFIER$ebnf$1", "symbols": ["IDENTIFIER$ebnf$1", /[a-zA-Z0-9_$]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "IDENTIFIER$ebnf$1", "symbols": ["IDENTIFIER$ebnf$1", /[a-zA-Z0-9_$-]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "IDENTIFIER", "symbols": ["ID_START", "IDENTIFIER$ebnf$1"], "postprocess": join},
     {"name": "ID_START", "symbols": [/[a-zA-Z$_]/], "postprocess": id},
     {"name": "VALUE", "symbols": ["NUMBER"], "postprocess": id},

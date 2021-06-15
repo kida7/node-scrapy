@@ -1,16 +1,17 @@
-import { extract } from "."
+import { extract } from ".";
+import { parseQuery } from "./query-parser";
 
 const HomeModel = {
-    data: [
-        '.tiptip',
-        {
-            image: 'img => src',
-            url: '=> href',
-            title: '+ div .al-c',
-            summary: '+ div .fs-12 | trim'
-        }
-    ]
-}
+  data: [
+    ".tiptip",
+    {
+      image: "img => src",
+      url: "=> href",
+      title: "+ div .al-c",
+      summary: "+ div .fs-12 | trim",
+    },
+  ],
+};
 let html = `<div id="storyPinked">
 
 <h3>TIÊU ĐIỂM TRUYỆN HÔM NAY</h3>
@@ -61,5 +62,6 @@ JA Translations
             </p>
         </div>
 </article>
-</div>`
-console.log(extract(html, HomeModel))
+</div>`;
+// console.log(extract(html, HomeModel))
+console.log(JSON.stringify(parseQuery("| log('a',1,2)")));

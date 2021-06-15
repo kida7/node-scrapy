@@ -1,4 +1,4 @@
-// Generated automatically by nearley, version 2.19.1
+// Generated automatically by nearley, version 2.20.1
 // http://github.com/Hardmath123/nearley
 (function () {
 function id(x) { return x[0]; }
@@ -29,12 +29,18 @@ var grammar = {
     {"name": "GETTER", "symbols": ["GETTER$string$1", "__", "IDENTIFIER"], "postprocess": d => d[2]},
     {"name": "FILTER_LIST", "symbols": ["FILTER"]},
     {"name": "FILTER_LIST", "symbols": ["FILTER_LIST", "__", "FILTER"], "postprocess": d => flatten([d[0], d[2]])},
-    {"name": "FILTER$ebnf$1", "symbols": []},
-    {"name": "FILTER$ebnf$1", "symbols": ["FILTER$ebnf$1", "FILTER_ARG"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "FILTER", "symbols": [{"literal":"|"}, "__", "IDENTIFIER", "FILTER$ebnf$1"], "postprocess":  d => ({
-          name: d[2],
-          args: d[3]
-        }) },
+    {"name": "PARAM$ebnf$1", "symbols": []},
+    {"name": "PARAM$ebnf$1", "symbols": ["PARAM$ebnf$1", {"literal":","}], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "PARAM", "symbols": ["VALUE", "_", "PARAM$ebnf$1"], "postprocess": d => d[0]},
+    {"name": "PARAMS$ebnf$1", "symbols": ["PARAM"]},
+    {"name": "PARAMS$ebnf$1", "symbols": ["PARAMS$ebnf$1", "PARAM"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "PARAMS", "symbols": ["PARAMS$ebnf$1"], "postprocess": id},
+    {"name": "FUNC", "symbols": ["NAME_BODY"], "postprocess": id => ({name: id})},
+    {"name": "FUNC", "symbols": ["NAME_BODY", {"literal":"("}, "_", "PARAMS", "_", {"literal":")"}], "postprocess":  d => ({
+          name:d[0],
+          args:d[3]
+        })},
+    {"name": "FILTER", "symbols": [{"literal":"|"}, "__", "FUNC"], "postprocess": d => d[2]},
     {"name": "FILTER_ARG", "symbols": [{"literal":":"}, "VALUE"], "postprocess": d => d[1]},
     {"name": "IDENTIFIER$ebnf$1", "symbols": []},
     {"name": "IDENTIFIER$ebnf$1", "symbols": ["IDENTIFIER$ebnf$1", /[a-zA-Z0-9_$-]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},

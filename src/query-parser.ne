@@ -32,10 +32,17 @@ FILTER_LIST ->
     FILTER
   | FILTER_LIST __ FILTER {% d => flatten([d[0], d[2]]) %}
 
-FILTER -> "|" __ IDENTIFIER FILTER_ARG:* {% d => ({
-  name: d[2],
-  args: d[3]
-}) %}
+PARAM -> VALUE _ ",":* {% d => d[0] %}
+
+PARAMS -> PARAM:+ {% id %}
+
+FUNC -> NAME_BODY {% id => ({name: id})%}
+  | NAME_BODY "(" _ PARAMS _ ")" {% d => ({
+    name:d[0],
+    args:d[3]
+  })%}
+
+FILTER -> "|" __ FUNC {% d => d[2] %}
 
 FILTER_ARG -> ":" VALUE {% d => d[1] %}
 

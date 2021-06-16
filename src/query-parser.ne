@@ -36,7 +36,7 @@ PARAM -> VALUE _ ",":* {% d => d[0] %}
 
 PARAMS -> PARAM:+ {% id %}
 
-FUNC -> NAME_BODY {% id => ({name: id})%}
+FUNC -> NAME_BODY {% d => ({name: d[0]})%}
   | NAME_BODY "(" _ PARAMS _ ")" {% d => ({
     name:d[0],
     args:d[3]

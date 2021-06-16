@@ -1,5 +1,5 @@
-import { extract } from ".";
-import { parseQuery } from "./query-parser";
+import { extract } from "./src";
+import { parseQuery } from "./src/query-parser";
 
 const HomeModel = {
   data: [
@@ -64,4 +64,4 @@ JA Translations
 </article>
 </div>`;
 // console.log(extract(html, HomeModel))
-console.log(JSON.stringify(parseQuery("| log('a',1,2)")));
+console.log(JSON.stringify(parseQuery("a | trim")));

@@ -1,20 +1,22 @@
+import cheerio from "cheerio";
+import { extractItem } from "./extractItem";
 
-
-import cheerio from 'cheerio'
-import { extractItem } from './extractItem'
-
-export function extract(html: string, model: any, options?: CheerioOptionsInterface): object {
+export function extract(
+  html: string,
+  model: any,
+  options?: CheerioOptionsInterface,
+  debug?: boolean
+): object {
   // Using Object.assign instead of object spread removes the need of null checks.
 
-  let deserializedModel
+  let deserializedModel;
 
   try {
-    deserializedModel = JSON.parse(JSON.stringify(model))
+    deserializedModel = JSON.parse(JSON.stringify(model));
   } catch (error) {
-    throw `The model cannot be serialized; ${error.messag}`
+    throw `The model cannot be serialized; ${error.messag}`;
   }
-  const $ = cheerio.load(html, options)
+  const $ = cheerio.load(html, options);
 
-  return extractItem($, $.root(), deserializedModel)
+  return extractItem($, $.root(), deserializedModel, debug);
 }
-

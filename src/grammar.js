@@ -35,7 +35,7 @@ var grammar = {
     {"name": "PARAMS$ebnf$1", "symbols": ["PARAM"]},
     {"name": "PARAMS$ebnf$1", "symbols": ["PARAMS$ebnf$1", "PARAM"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "PARAMS", "symbols": ["PARAMS$ebnf$1"], "postprocess": id},
-    {"name": "FUNC", "symbols": ["NAME_BODY"], "postprocess": id => ({name: id})},
+    {"name": "FUNC", "symbols": ["NAME_BODY"], "postprocess": d => ({name: d[0]})},
     {"name": "FUNC", "symbols": ["NAME_BODY", {"literal":"("}, "_", "PARAMS", "_", {"literal":")"}], "postprocess":  d => ({
           name:d[0],
           args:d[3]

@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.extractItem = void 0;
 var lodash_1 = __importDefault(require("lodash"));
 var query_parser_1 = require("./query-parser");
-function extractItem($, dom, item) {
+function extractItem($, dom, item, debug) {
     if (lodash_1.default.isArray(item)) {
         var queryAST_1 = query_parser_1.parseQuery(item[0]);
         var matches = dom.find(queryAST_1.selector);
@@ -21,6 +21,9 @@ function extractItem($, dom, item) {
             return matches.toArray().map(function (context) {
                 return extractItem($, $(context), item[1]);
             });
+        }
+        if (debug) {
+            console.log(item, queryAST_1);
         }
         return matches.toArray().map(function (context) {
             var data = resolveGetter($(context), queryAST_1);
@@ -40,9 +43,12 @@ function extractItem($, dom, item) {
         if (!match)
             return null;
         var data = resolveGetter(match, query);
+        if (debug) {
+            console.log(item, query);
+        }
         return applyFilters(data, query.filters);
     }
-    var unsupportedType = item === null ? 'null' : typeof item;
+    var unsupportedType = item === null ? "null" : typeof item;
     throw "The model has to be a string, an Object or an Array; got " + unsupportedType + " instead.";
 }
 exports.extractItem = extractItem;
@@ -54,10 +60,13 @@ function resolveGetter(dom, query) {
     return dom;
 }
 function applyFilters(data, filters) {
-    filters && filters.forEach(function (filter) {
-        //@ts-ignore
-        var func = data[filter.name];
-        data = func ? func.call.apply(func, __spreadArray([data], filter.args)) : '';
-    });
+    filters &&
+        data &&
+        filters.forEach(function (filter) {
+            //@ts-ignore
+            var func = data[filter.name];
+            var args = filter.args || [];
+            data = func ? func.call.apply(func, __spreadArray([data], args)) : "";
+        });
     return data;
 }

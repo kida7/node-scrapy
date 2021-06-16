@@ -55,6 +55,7 @@
   },
   "sideEffects": false,
   "scripts": {
-    "build": "npx nearleyc src/query-parser.ne -o src/grammar.js && tsc && cp src/grammar.js dist/"
+    "compile": "npx nearleyc src/query-parser.ne -o src/grammar.js",
+    "build": "rm -rf dist && npx nearleyc src/query-parser.ne -o src/grammar.js && tsc && cp src/grammar.js dist/"
   }
 }
